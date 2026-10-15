@@ -1,11 +1,15 @@
 ﻿using T1.Api;
 
-Console.WriteLine("Hello, World!");
+// Jednoduchá konzolová aplikace: vytvoří instanci poskytovatele, získá zprávu
+// a náhodné "šťastné" číslo a vypíše je na konzoli.
+var provider = new DateTimeInfoProvider();
 
-IMessageProvider provider = new DateTimeInfoProvider();
+// Získání textové zprávy (aktuální datum/čas)
+var message = provider.GetMessage();
 
-string message = provider.GetMessage();
+// Získání náhodného čísla z poskytovatele
+var luckyNumber = provider.GetLuckyNumber();
 
-Console.WriteLine(message);
-
+// Vypíše obě informace najednou
+Console.WriteLine($"{message}\nYour lucky number is {luckyNumber}");
 
