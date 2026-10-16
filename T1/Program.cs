@@ -13,3 +13,4 @@ var luckyNumber = provider.GetLuckyNumber();
 // Vypíše obě informace najednou
 Console.WriteLine($"{message}\nYour lucky number is {luckyNumber}");
 
+// a tohle jsou ty radky navic, které se přidaly do kódu, aby se zobrazily informace o verzi C# a cílovém frameworku
