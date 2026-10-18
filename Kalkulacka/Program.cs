@@ -1,34 +1,39 @@
-﻿
-using System;
+﻿using System;
 using System.Globalization;
 
 class Program
 {
+    // Hlavní vstup do programu
+    // Program opakovaně čte dva operandy a volbu operace, zpracuje výsledek a umožní opakovat výpočet.
     static void Main()
     {
         Console.WriteLine("Vítejte v kalkulačce");
         string pokracovat = "ano";
+        // Smyčka programu, pokračuje dokud uživatel zadá "ano"
         while (pokracovat.Trim().ToLowerInvariant() == "ano")
         {
+            // Načtení dvou čísel s validací
             float a = ReadFloat("Zadejte první číslo:");
             float b = ReadFloat("Zadejte druhé číslo:");
 
+            // Načtení volby operace v rozmezí 1..4
             int volba = ReadIntInRange("Zvolte si operaci:\n1 - sčítání\n2 - odčítání\n3 - násobení\n4 - dělení", 1, 4);
 
-            bool vypis = true;
+            bool vypis = true; // indikátor, zda má být výsledek vypsán (např. false při dělení nulou)
             float vysledek = 0f;
             switch (volba)
             {
                 case 1:
-                    vysledek = a + b;
+                    vysledek = a + b; // sčítání
                     break;
                 case 2:
-                    vysledek = a - b;
+                    vysledek = a - b; // odčítání
                     break;
                 case 3:
-                    vysledek = a * b;
+                    vysledek = a * b; // násobení
                     break;
                 case 4:
+                    // Ošetření dělení nulou
                     if (b == 0f)
                     {
                         Console.WriteLine("Chyba: dělení nulou není povoleno.");
@@ -36,7 +41,7 @@ class Program
                     }
                     else
                     {
-                        vysledek = a / b;
+                        vysledek = a / b; // dělení
                     }
                     break;
             }
@@ -52,6 +57,9 @@ class Program
         Console.ReadKey();
     }
 
+    // ReadFloat: bezpečně načte float z konzole.
+    // Opakuje výzvu, dokud uživatel nezadá platné číslo.
+    // Podporuje místní nastavení (desetinná čárka/tečka) a jako fallback InvariantCulture.
     static float ReadFloat(string prompt)
     {
         while (true)
@@ -66,10 +74,11 @@ class Program
 
             input = input.Trim();
 
+            // Nejprve použijeme aktuální kulturu (přizpůsobí se systému, např. čárka v CZ)
             if (float.TryParse(input, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.CurrentCulture, out float result))
                 return result;
 
-            // fallback: allow dot as decimal separator if user typed it
+            // Fallback: povolit i formát s tečkou jako desetinným oddělovačem
             if (float.TryParse(input, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out result))
                 return result;
 
@@ -77,6 +86,8 @@ class Program
         }
     }
 
+    // ReadIntInRange: načte celé číslo a zajistí, že je v daném rozsahu [min,max]
+    // Opakuje výzvu dokud uživatel nezadá platnou hodnotu.
     static int ReadIntInRange(string prompt, int min, int max)
     {
         while (true)
