@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="../Kalkulacka/Kalkulacka.csproj" Id="c8432570-874b-4e6d-88e7-dc71edd96f2e" />
   <Project Path="../T1.Api/T1.Api.csproj" />
   <Project Path="T1.csproj" />
 </Solution>
